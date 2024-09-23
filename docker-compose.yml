@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    volumes:
+      - ./config/hoppscotch.conf:/etc/nginx/conf.d/hoppscotch.conf
+      - ./config/hoppscotch-api.conf:/etc/nginx/conf.d/hoppscotch-api.conf
+      - ./config/hoppscotch-admin.conf:/etc/nginx/conf.d/hoppscotch-admin.conf
+      - ./certs:/etc/nginx/certs
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - global_network
+networks:
+  global_network:
+    external: true
